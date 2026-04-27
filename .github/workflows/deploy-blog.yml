@@ -1,0 +1,43 @@
+name: Deploy Blog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/blog/**'
+      - 'packages/theme/**'
+      - 'package.json'
+      - 'package-lock.json'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'apps/blog/**'
+      - 'packages/theme/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - run: npm run build --workspace=apps/blog
+
+      - name: Deploy to CF Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          command: pages deploy apps/blog/dist --project-name=lightforge-blog --commit-dirty=true
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
