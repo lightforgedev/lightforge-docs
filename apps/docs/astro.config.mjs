@@ -11,13 +11,7 @@ export default defineConfig({
       title: "Lightforge Docs",
       description:
         "Documentation for Saathi, AEGIS Platform, API references, and governance.",
-      social: [
-        {
-          icon: "github",
-          label: "GitHub",
-          href: "https://github.com/lightforgedev",
-        },
-      ],
+      social: { github: "https://github.com/lightforgedev" },
       sidebar: [
         {
           label: "Start here",
