@@ -20,5 +20,6 @@
   },
   "overrides": {
     "@astrojs/sitemap": "3.6.1"
-  }
+  },
+  "description": "Documentation and blog platform for lightforge.dev"
 }
