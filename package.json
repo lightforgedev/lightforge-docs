@@ -1,0 +1,21 @@
+{
+  "name": "lightforge-docs",
+  "private": true,
+  "version": "0.0.1",
+  "license": "MIT",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:docs": "npm run dev --workspace=apps/docs",
+    "dev:blog": "npm run dev --workspace=apps/blog",
+    "build:docs": "npm run build --workspace=apps/docs",
+    "build:blog": "npm run build --workspace=apps/blog",
+    "build": "npm run build:docs && npm run build:blog",
+    "lint:links": "npm run lint:links --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

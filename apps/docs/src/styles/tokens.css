@@ -1,0 +1,22 @@
+/* Lightforge brand tokens — placeholder.
+ * Cleo owns the canonical token system; this file is overwritten when
+ * `general/aegis-platform/website/landing-page-v3-spec` token export lands.
+ */
+:root {
+  --sl-color-accent-low: #1a2540;
+  --sl-color-accent: #4a6cf7;
+  --sl-color-accent-high: #b9c8ff;
+  --sl-color-bg: #0d111a;
+  --sl-color-bg-nav: #11161f;
+  --sl-color-bg-sidebar: #11161f;
+  --sl-color-text: #e6eaf2;
+  --sl-color-text-accent: #b9c8ff;
+}
+:root[data-theme="light"] {
+  --sl-color-accent-low: #d6deff;
+  --sl-color-accent: #2541b2;
+  --sl-color-accent-high: #1a2540;
+  --sl-color-bg: #ffffff;
+  --sl-color-text: #0d111a;
+  --sl-color-text-accent: #2541b2;
+}

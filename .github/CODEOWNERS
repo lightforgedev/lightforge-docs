@@ -1,0 +1,20 @@
+# Editorial routing per PRD.
+# - Brand/blog content → Cleo (CMO) for claim-evidence gate
+# - Customer-facing docs → Aria (CS) for commitment-bearing copy approval
+# - Infrastructure → Forge (Eng)
+
+apps/blog/                                 @cleo @forge
+apps/docs/saathi/                          @aria @forge
+apps/docs/platform/                        @forge
+apps/docs/api/                             @forge
+apps/docs/governance/                      @forge
+
+# Infra / framework
+.github/                                   @forge @jasper
+package.json                               @forge
+apps/*/astro.config.mjs                    @forge
+apps/*/package.json                        @forge
+
+# Theme tokens
+apps/*/src/styles/                         @cleo @forge
+packages/theme/                            @cleo @forge

@@ -1,0 +1,6 @@
+/* Lightforge canonical brand tokens.
+ *
+ * Source of truth: `general/aegis-platform/website/landing-page-v3-spec` (Cleo).
+ * apps/{docs,blog} should import from this file once Cleo's token export lands.
+ * Today both apps inline a placeholder copy in src/styles/tokens.css.
+ */

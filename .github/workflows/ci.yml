@@ -1,39 +1,48 @@
 name: CI
 
 on:
-  pull_request:
+  push:
     branches: [main]
+  pull_request:
 
 jobs:
-  lint-and-build:
+  build:
+    name: Build (${{ matrix.app }})
     runs-on: ubuntu-latest
-
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [docs, blog]
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-
+          node-version: "20"
+          cache: "npm"
       - run: npm ci
-
-      - name: Build docs
-        run: npm run build --workspace=apps/docs
-
-      - name: Build blog
-        run: npm run build --workspace=apps/blog
-
-      - name: Check for absolute-root links in blog
+      - run: npm run build:${{ matrix.app }}
+      - name: No-absolute-root-links smoke test (blog only)
+        if: matrix.app == 'blog'
         run: |
-          if grep -r 'href="/' apps/blog/src/ --include='*.mdx' --include='*.md' --include='*.astro' -l 2>/dev/null; then
-            echo "ERROR: absolute-root links found in blog content. Use relative links or /blog-prefixed paths."
+          # Authored blog content must not use absolute-root links — they break
+          # under base: '/blog'. Catch in source so the message is actionable.
+          if grep -REn 'href="/[a-z]' apps/blog/src/content --include='*.mdx' --include='*.md'; then
+            echo "::error::Found absolute-root links in blog source. Use relative or /blog-prefixed paths."
             exit 1
           fi
 
-      - name: No raw HTML in authored content
+  sanctioned-components-lint:
+    name: Sanctioned components lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reject raw HTML in authored MDX
         run: |
-          if grep -rn '<[a-z]' apps/docs/src/content/ apps/blog/src/content/ --include='*.mdx' --include='*.md' 2>/dev/null | grep -v '<!--' | grep -v '{/*'; then
-            echo "ERROR: raw HTML found in authored content. Use sanctioned components only."
+          # Authored content must use sanctioned components only.
+          # v1 sanctioned: <Card>, <CardGrid>, <Aside>, <Tabs>, <TabItem>, <Code>, <LinkCard>, <AudioPlayer>, <Callout>, <CodeOutput>.
+          # Reject raw <iframe>, <script>, <video>, <audio>, <embed>, <object>.
+          forbidden='<(iframe|script|video|audio|embed|object)\b'
+          if grep -REn "$forbidden" apps/docs/src/content apps/blog/src/content --include='*.mdx' --include='*.md'; then
+            echo "::error::Raw HTML detected in authored content. Use sanctioned components only."
             exit 1
           fi

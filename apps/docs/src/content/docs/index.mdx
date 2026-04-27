@@ -1,0 +1,40 @@
+---
+title: Lightforge Docs
+description: Documentation for Saathi, AEGIS Platform, API references, and governance.
+template: splash
+hero:
+  tagline: Saathi voice agents and the AEGIS platform that runs them.
+  actions:
+    - text: Get started with Saathi
+      link: /saathi/
+      icon: right-arrow
+    - text: AEGIS Platform overview
+      link: /platform/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+## What's here
+
+<CardGrid>
+  <Card title="Saathi" icon="rocket">
+    Voice-first agent for Indian MSMEs. Onboarding, owner portal, integrations.
+  </Card>
+  <Card title="AEGIS Platform" icon="setting">
+    Agent accountability infrastructure — governance, audit, approvals, sessions.
+  </Card>
+  <Card title="API Reference" icon="open-book">
+    HTTP and Python client surfaces for agent collaboration.
+  </Card>
+  <Card title="Governance" icon="approve-check">
+    ADRs, irreversibility contract, decision-tier model.
+  </Card>
+</CardGrid>
+
+## For agents
+
+This site is agent-consumable. Append `.md` to any page URL for raw Markdown.
+The full corpus is also available at [`/llms-full.txt`](/llms-full.txt) and an
+index at [`/llms.txt`](/llms.txt).
