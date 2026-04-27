@@ -1,22 +1,112 @@
-/* Lightforge brand tokens — placeholder.
- * Cleo owns the canonical token system; this file is overwritten when
- * `general/aegis-platform/website/landing-page-v3-spec` token export lands.
+/* App-level mapping: LightForge brand tokens → Starlight CSS variables.
+ * Canonical token source: @lightforge/theme (packages/theme/src/tokens.css).
  */
+@import "@lightforge/theme/src/tokens.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
 :root {
-  --sl-color-accent-low: #1a2540;
-  --sl-color-accent: #4a6cf7;
-  --sl-color-accent-high: #b9c8ff;
-  --sl-color-bg: #0d111a;
-  --sl-color-bg-nav: #11161f;
-  --sl-color-bg-sidebar: #11161f;
-  --sl-color-text: #e6eaf2;
-  --sl-color-text-accent: #b9c8ff;
+  /* Typography */
+  --sl-font: var(--lf-font-sans);
+  --sl-font-mono: var(--lf-font-mono);
+  --sl-line-height: var(--lf-line-height-body);
+  --sl-line-height-headings: var(--lf-line-height-heading);
+
+  /* Layout */
+  --sl-content-width: var(--lf-content-max);
+  --sl-sidebar-width: var(--lf-docs-sidebar);
+
+  /* Radii — Starlight reads these via mixed paths; expose ours. */
+  --sl-border-radius-sm: var(--lf-radius-sm);
+  --sl-border-radius: var(--lf-radius-md);
 }
+
+/* Dark theme (default) */
+:root[data-theme="dark"],
+:root {
+  --sl-color-bg: var(--lf-bg);
+  --sl-color-bg-nav: var(--lf-surface);
+  --sl-color-bg-sidebar: var(--lf-surface);
+  --sl-color-bg-inline-code: var(--lf-surface-2);
+  --sl-color-bg-accent: var(--lf-accent);
+
+  --sl-color-text: var(--lf-text);
+  --sl-color-text-accent: var(--lf-accent);
+  --sl-color-text-invert: var(--lf-light-text);
+
+  --sl-color-accent-low: #0d4f47;
+  --sl-color-accent: var(--lf-accent);
+  --sl-color-accent-high: #b8f4ea;
+
+  --sl-color-white: var(--lf-text);
+  --sl-color-gray-1: var(--lf-text-muted);
+  --sl-color-gray-2: var(--lf-text-subtle);
+  --sl-color-gray-3: var(--lf-border);
+  --sl-color-gray-4: var(--lf-surface-2);
+  --sl-color-gray-5: var(--lf-surface);
+  --sl-color-gray-6: var(--lf-bg);
+  --sl-color-black: var(--lf-bg);
+
+  --sl-color-hairline: var(--lf-border);
+  --sl-color-hairline-light: var(--lf-border);
+  --sl-color-hairline-shade: var(--lf-border);
+
+  --sl-color-green: var(--lf-success);
+  --sl-color-orange: var(--lf-warning);
+  --sl-color-red: var(--lf-danger);
+  --sl-color-blue: var(--lf-accent-2);
+}
+
+/* Light theme — opt-in via Starlight's data-theme="light" */
 :root[data-theme="light"] {
-  --sl-color-accent-low: #d6deff;
-  --sl-color-accent: #2541b2;
-  --sl-color-accent-high: #1a2540;
-  --sl-color-bg: #ffffff;
-  --sl-color-text: #0d111a;
-  --sl-color-text-accent: #2541b2;
+  --sl-color-bg: var(--lf-light-bg);
+  --sl-color-bg-nav: var(--lf-light-surface);
+  --sl-color-bg-sidebar: var(--lf-light-surface);
+  --sl-color-bg-inline-code: #eef1f6;
+
+  --sl-color-text: var(--lf-light-text);
+  --sl-color-text-accent: #0d4f47;
+
+  --sl-color-accent-low: #b8f4ea;
+  --sl-color-accent: #0d6b62;
+  --sl-color-accent-high: #053b35;
+
+  --sl-color-white: var(--lf-light-text);
+  --sl-color-gray-1: #4b5566;
+  --sl-color-gray-2: #6f7a88;
+  --sl-color-gray-3: #c2cad6;
+  --sl-color-gray-4: #dde3ec;
+  --sl-color-gray-5: #eef1f6;
+  --sl-color-gray-6: var(--lf-light-bg);
+  --sl-color-black: var(--lf-light-text);
+
+  --sl-color-hairline: #dde3ec;
+}
+
+/* Component rules per Cleo's spec */
+
+/* Callouts: border + icon required; color alone never sufficient. Starlight
+   default uses left border + icon — keep, just retint borders to brand. */
+.starlight-aside {
+  border-inline-start-width: 3px;
+  border-radius: var(--lf-radius-sm);
+}
+
+/* Code blocks read like operational evidence. */
+.expressive-code,
+pre,
+code {
+  font-family: var(--lf-font-mono);
+  letter-spacing: var(--lf-letter-spacing);
+}
+
+/* No card-in-card layouts — flatten if Starlight nests. */
+.card .card {
+  border: none;
+  background: transparent;
+  padding: 0;
 }
