@@ -21,6 +21,7 @@
   --sl-sidebar-width: var(--lf-docs-sidebar);
   --sl-border-radius-sm: var(--lf-radius-sm);
   --sl-border-radius: var(--lf-radius-md);
+  --sl-content-inline-start: 0rem;
 }
 
 /* Single canonical light theme — apply across all data-theme attribute
@@ -75,6 +76,184 @@ starlight-theme-select {
   font-family: var(--lf-font-display);
   letter-spacing: var(--lf-letter-spacing);
   font-weight: 700;
+}
+
+/* Blog composition: editorial page, not a default docs reader. */
+html,
+body {
+  background:
+    linear-gradient(var(--lf-line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--lf-line-soft) 1px, transparent 1px),
+    var(--lf-bg);
+  background-size: 220px 156px;
+  background-position: 112px 84px;
+  color: var(--lf-ink);
+}
+
+body {
+  font-family: var(--lf-font-sans);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      145deg,
+      transparent 0 43%,
+      color-mix(in srgb, var(--lf-line) 72%, transparent) 43.15% 43.45%,
+      transparent 43.6% 100%
+    );
+  opacity: 0.44;
+  z-index: -1;
+}
+
+header.header {
+  min-height: 68px;
+  border-bottom: 1px solid var(--lf-line);
+  background: color-mix(in srgb, var(--lf-bg) 92%, white);
+}
+
+.site-title {
+  color: var(--lf-accent);
+  font-family: var(--lf-font-sans);
+  font-size: 1.45rem;
+  font-weight: 800;
+}
+
+.search,
+site-search,
+starlight-search {
+  opacity: 0.58;
+  max-width: 15rem;
+}
+
+site-search button,
+.search button {
+  border: 1px solid var(--lf-line);
+  border-radius: var(--lf-radius-md);
+  background: color-mix(in srgb, var(--lf-bg) 88%, white);
+  box-shadow: none;
+}
+
+.page {
+  background: transparent;
+  --sl-content-inline-start: 0rem;
+}
+
+.main-frame {
+  background: transparent;
+  padding-inline-start: 0 !important;
+}
+
+.sidebar,
+.sidebar-pane,
+.sidebar-content,
+.right-sidebar-container,
+.right-sidebar {
+  display: none !important;
+}
+
+[data-has-sidebar] .header,
+[data-has-sidebar][data-has-toc] .main-pane,
+[data-has-sidebar] .main-pane,
+.main-pane {
+  width: 100%;
+}
+
+.content-panel,
+.main-pane {
+  background: transparent;
+}
+
+.sl-markdown-content {
+  max-width: 860px;
+  padding-block-start: clamp(2.5rem, 6vw, 5.5rem);
+}
+
+.sl-markdown-content h1 {
+  max-width: 760px;
+  margin-bottom: 1.5rem;
+  color: var(--lf-ink);
+  font-size: clamp(3.4rem, 7.2vw, 6.8rem);
+  line-height: 0.96;
+  letter-spacing: -0.015em;
+}
+
+h1#_top {
+  max-width: 820px;
+  margin-top: clamp(2.5rem, 6vw, 5.5rem);
+  margin-bottom: 1.7rem;
+  color: var(--lf-ink);
+  font-family: var(--lf-font-display);
+  font-size: clamp(3.5rem, 7.5vw, 7rem);
+  font-weight: 900;
+  line-height: 0.94;
+  letter-spacing: -0.015em;
+}
+
+.sl-markdown-content h1::before,
+h1#_top::before {
+  content: "LIGHTFORGE BLOG";
+  display: block;
+  width: fit-content;
+  margin: 0 0 clamp(2rem, 4vw, 3.5rem) min(20vw, 20rem);
+  padding: 0.45rem 1.45rem 0.38rem;
+  border: 2px solid color-mix(in srgb, var(--lf-accent) 72%, white);
+  border-radius: 999px;
+  color: var(--lf-accent);
+  font-family: var(--lf-font-sans);
+  font-size: clamp(0.82rem, 1.7vw, 1rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.sl-markdown-content h1::after,
+h1#_top::after {
+  content: "";
+  display: block;
+  width: min(100%, 720px);
+  height: 1px;
+  margin-top: 1.8rem;
+  background: var(--lf-line);
+}
+
+.sl-markdown-content h2 {
+  margin-top: 3.5rem;
+  color: var(--lf-ink);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.05;
+}
+
+.sl-markdown-content p {
+  color: var(--lf-ink);
+  font-size: 1.05rem;
+}
+
+.sl-markdown-content p:first-of-type {
+  max-width: 760px;
+  color: var(--lf-muted);
+  font-size: clamp(1.35rem, 2vw, 1.85rem);
+  line-height: 1.42;
+}
+
+.sl-markdown-content hr {
+  border-color: var(--lf-line);
+}
+
+.tag,
+a[rel="tag"] {
+  border: 1px solid var(--lf-line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--lf-accent);
+}
+
+main img[alt="Forge"],
+main img[src*="/authors/forge"] {
+  display: none !important;
 }
 
 /* Component rules per Cleo's spec */
