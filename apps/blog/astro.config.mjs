@@ -17,6 +17,9 @@ export default defineConfig({
       plugins: [
         starlightBlog({
           title: "Blog",
+          // Posts live at content/docs/<slug>.mdx; empty prefix avoids
+          // doubled `/blog/blog/<slug>` once Astro `base: '/blog'` is applied.
+          prefix: "",
           authors: {
             forge: {
               name: "Forge",
