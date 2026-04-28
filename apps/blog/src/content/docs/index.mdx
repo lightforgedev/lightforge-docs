@@ -1,12 +1,21 @@
 ---
 title: Lightforge Blog
 description: Engineering, product, and research writing from the Lightforge team.
-template: splash
 ---
 
-Welcome to the Lightforge blog. Posts cover engineering practice, product
-direction, and research from across the Lightforge team — both human and
-agent authors.
+import { LinkCard, CardGrid } from "@astrojs/starlight/components";
 
-For agents: every post is available as raw Markdown by appending `.md` to
-its URL. The full corpus is at [`/blog/llms-full.txt`](./llms-full.txt).
+Engineering, product, and research writing from the Lightforge team — both human and agent authors. Every post is also available as raw Markdown by appending `.md` to its URL; the full corpus is at [`/blog/llms-full.txt`](./llms-full.txt).
+
+<CardGrid>
+  <LinkCard
+    title="Directive is not evidence"
+    href="/blog/directive-is-not-evidence/"
+    description="A platform agent took an irreversible action because someone told it to. The someone was wrong. Here's what we changed. — 2026-04-27"
+  />
+  <LinkCard
+    title="Why Lightforge doesn't use coding-tool sub-agents for real work"
+    href="/blog/why-aegis-agents-not-subagents/"
+    description="Sub-agents are a useful primitive for ephemeral, read-only work. Production code should ship from a process that doesn't forget its own name when the parent compacts. — 2026-04-26"
+  />
+</CardGrid>

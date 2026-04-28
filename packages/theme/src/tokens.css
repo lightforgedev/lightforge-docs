@@ -1,53 +1,73 @@
 /* Lightforge canonical brand tokens.
  *
- * Owner: Cleo (CMO). Source: KB doc `marketing/lightforge-docs-theme-tokens.md`
- * (id 30c160db-48d2-4be6-aa29-57c90eb65246), 2026-04-28 (corrected pass).
- * Aligned with: general/marketing/linkedin/images/*.svg editorial asset system.
+ * Source of truth: the Phoenix marketing site at lightforge.dev
+ * (token names --lf-color-* in apps/aegis_web/.../app.css). This file
+ * mirrors the live brand exactly. Both light and dark variants supported.
  *
  * Posture: serious enterprise infra. Quiet, high-trust, technical, audit-ready.
- * Light off-white canvas, black editorial type, restrained gray structure,
- * coral accent. UI and evidence surfaces carry the brand. No hype visuals.
- *
- * Apps map these to framework-specific variables (e.g. Starlight `--sl-*`)
- * in their own tokens.css.
+ * Inter body, Oswald heading, coral-orange accent, restrained gray structure.
  */
 
 :root {
-  /* Color — light canonical (matches LinkedIn editorial system) */
-  --lf-bg: #f7f7f5;
-  --lf-surface: #ffffff;
-  --lf-surface-soft: #ece9e3;
-  --lf-ink: #111111;
-  --lf-muted: #606060;
-  --lf-muted-2: #8a867e;
-  --lf-line: #d8d3ca;
-  --lf-line-soft: #e4e0d8;
-  --lf-accent: #ff5a3d;
-  --lf-accent-hover: #e6462e;
-  --lf-success: #2f8f5b;
-  --lf-warning: #b7791f;
-  --lf-danger: #c83a2b;
-
-  /* Inverse — rare code/hero strips only, not page chrome */
-  --lf-dark-bg: #111111;
-  --lf-dark-text: #f7f7f5;
-
-  /* Typography */
-  --lf-font-sans: Arial, Helvetica, ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --lf-font-display: "Arial Narrow", "Arial", "Helvetica Neue Condensed",
-    Impact, sans-serif;
-  --lf-font-mono: "JetBrains Mono", "SFMono-Regular", Consolas,
-    "Liberation Mono", monospace;
+  /* Typography — Phoenix uses Inter / Oswald / JetBrains Mono */
+  --lf-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  --lf-font-heading: "Oswald", "Inter", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  --lf-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, "Liberation Mono", monospace;
   --lf-letter-spacing: 0;
-  --lf-line-height-body: 1.65;
-  --lf-line-height-heading: 1.05;
+  --lf-line-height-body: 1.6;
+  --lf-line-height-heading: 1.15;
 
   /* Layout */
   --lf-radius-sm: 4px;
   --lf-radius-md: 8px;
-  --lf-radius-lg: 22px;
+  --lf-radius-lg: 12px;
   --lf-content-max: 1120px;
   --lf-docs-sidebar: 280px;
-  --lf-border-width: 2px;
+  --lf-border-width: 1px;
+
+  /* Color — light mode (default, mirrors Phoenix --lf-color-* light values) */
+  --lf-bg: #fafafa;
+  --lf-surface: #ffffff;
+  --lf-surface-elevated: #f5f5f5;
+  --lf-surface-muted: #e5e5e5;
+  --lf-line: #d4d4d4;
+  --lf-line-soft: #e5e5e5;
+  --lf-ink: #111111;
+  --lf-text-secondary: #555555;
+  --lf-muted: #6b7280;
+  --lf-muted-2: #9ca3af;
+  --lf-accent: #ff6b35;
+  --lf-accent-hover: #e55a2b;
+  --lf-text-on-accent: #ffffff;
+  --lf-accent-teal: #00d4aa;
+  --lf-success: #22c55e;
+  --lf-warning: #f59e0b;
+  --lf-danger: #ef4444;
+  --lf-sidebar-bg: #ffffff;
+  --lf-sidebar-active: #ff6b351f;
+  --lf-sidebar-hover: #ff6b350a;
+}
+
+/* Dark mode — explicit data-theme override OR system pref */
+:root[data-theme="dark"] {
+  --lf-bg: #141414;
+  --lf-surface: #1e1e1e;
+  --lf-surface-elevated: #2d2d2d;
+  --lf-surface-muted: #3d3d3d;
+  --lf-line: #3d3d3d;
+  --lf-line-soft: #2d2d2d;
+  --lf-ink: #ffffff;
+  --lf-text-secondary: #9ca3af;
+  --lf-muted: #737373;
+  --lf-muted-2: #6b7280;
+  --lf-accent: #ff6b35;
+  --lf-accent-hover: #ff8559;
+  --lf-text-on-accent: #0d0d0d;
+  --lf-accent-teal: #00b892;
+  --lf-sidebar-bg: #181818;
+  --lf-sidebar-active: #ff6b3514;
+  --lf-sidebar-hover: #ff6b350a;
 }
