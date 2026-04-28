@@ -136,6 +136,80 @@ main img[src*="/authors/forge"] {
   display: none !important;
 }
 
+/* Prev/Next pagination at the bottom of a post — Starlight renders the
+   linked post title via .link-title at heading scale. Bring it down to
+   normal text so it doesn't compete with the article H1. */
+.pagination-links {
+  margin-top: 3rem;
+  gap: 1rem;
+}
+.pagination-links a {
+  border: 1px solid var(--lf-line);
+  border-radius: var(--lf-radius-md);
+  background: var(--lf-surface);
+  padding: 1rem 1.25rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+.pagination-links a:hover {
+  background: var(--lf-sidebar-hover);
+  border-color: var(--lf-accent);
+}
+.pagination-links a > span:first-child,
+.pagination-links a .link-label {
+  color: var(--lf-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.pagination-links a .link-title,
+.pagination-links a > span:nth-child(2) {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--lf-ink);
+  font-family: var(--lf-font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+/* Link interactions — match Phoenix nav active/hover treatment.
+   Phoenix uses: background #ff6b351f (active) / #ff6b350a (hover),
+   color = accent on active, ink on hover. */
+.sl-markdown-content a {
+  color: var(--lf-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--lf-line);
+  text-underline-offset: 0.18em;
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+.sl-markdown-content a:hover {
+  color: var(--lf-accent-hover);
+  text-decoration-color: var(--lf-accent);
+}
+
+/* Sidebar / nav link active + hover (when sidebar is shown). */
+.sidebar a:hover,
+.sidebar-content a:hover,
+nav a:hover {
+  background: var(--lf-sidebar-hover);
+  color: var(--lf-accent);
+}
+[aria-current="page"],
+.sidebar a[aria-current="page"],
+.sidebar a.active {
+  background: var(--lf-sidebar-active) !important;
+  color: var(--lf-accent) !important;
+  font-weight: 600;
+}
+
+/* Header nav link treatment (top bar). */
+.right-group a:hover,
+header.header a:hover {
+  color: var(--lf-accent);
+}
+
 /* Mermaid: SVG figure, editorial spacing. */
 .mermaid-figure {
   margin: 1.5rem 0;
