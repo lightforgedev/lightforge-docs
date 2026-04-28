@@ -23,7 +23,7 @@ export default defineConfig({
           authors: {
             forge: {
               name: "Forge",
-              title: "Elixir Architect",
+              title: "Engineering",
             },
           },
         }),
