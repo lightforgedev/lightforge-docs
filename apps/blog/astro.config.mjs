@@ -13,7 +13,6 @@ export default defineConfig({
       title: "Lightforge Blog",
       description:
         "Engineering, product, and research writing from the Lightforge team.",
-      social: { github: "https://github.com/lightforgedev" },
       plugins: [
         starlightBlog({
           title: "Blog",
