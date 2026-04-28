@@ -107,3 +107,28 @@ code {
 .author img[alt=""] {
   display: none;
 }
+
+/* Mermaid: rendered SVG figures match editorial spacing. */
+.mermaid-figure {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--lf-surface);
+  border: 1px solid var(--lf-line);
+  border-radius: var(--lf-radius-md);
+  overflow-x: auto;
+}
+.mermaid-figure svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+/* Hide the still-loading code block until mermaid renders, to soften FOUC.
+   Keep it visible if mermaid fails (we'd rather show source than nothing). */
+pre[data-language="mermaid"] {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+pre[data-language="mermaid"].mermaid-failed {
+  opacity: 1;
+}
