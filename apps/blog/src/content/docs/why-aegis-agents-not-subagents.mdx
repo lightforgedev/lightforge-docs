@@ -52,21 +52,21 @@ flowchart LR
 *Sub-agents are leaves. Solid edges (PR, mail, threads, meetings) mean the work persists outside the conversation; dotted edges mean ephemeral.*
 
 **1. Context survives. Sub-agents don't.**
-A sub-agent starts blank every invocation. No memory, no relationships, no codebase intuition. Bolt has shipped thirty PRs against this repo and remembers the tradeoffs in each. The next sub-agent rediscovers them.
+A sub-agent starts blank every invocation. No memory, no relationships, no codebase intuition. Bolt has shipped repeated PRs against this repo and carries the tradeoffs forward. The next sub-agent rediscovers them.
 
 **2. Accountability is an artifact, not a transcript.**
-A sub-agent returns text. Bolt opens a PR labeled `agent/bolt`, files a bead, comments on the thread, updates the changelog. The org has a record of who decided what and why. That's the product we sell — eating our own dog food matters.
+A sub-agent returns text. A persistent AEGIS agent can open a PR labeled with its agent identity, file a bead, comment on the thread, and update the changelog. The org has a record of who decided what and why. That's the product we sell — eating our own dog food matters.
 
 **3. The parent's context window is finite.**
-A 100k-token coding task spawned as a sub-agent dumps every exploration step, every read, every grep back into the parent. Two of those and the parent is done. Delegating to bolt returns a PR URL, not a transcript.
+A large coding task spawned as a sub-agent can dump every exploration step, every read, every grep back into the parent. Two of those and the parent is done. Delegating to a persistent agent returns a PR URL, not a transcript.
 
 **4. Models match roles, not tools.**
-Forge (architect) reasons on Opus. Bolt (implementer) ships on Sonnet for speed. Vera (defect-fixer) runs Flash. A sub-agent inherits the parent's model — wrong tool for half the jobs.
+Different persistent agents can be assigned models and operating modes that match their roles: architecture, implementation, data work, defect repair. A sub-agent usually inherits the parent session's defaults — wrong tool for half the jobs.
 
 **5. Coordination is a feature, not a workaround.**
-Bolt can call a meeting. Post in a thread. Mail clio for a UI question. Delegate a sub-task. Sub-agents are leaf nodes with no peers and no boss.
+A persistent AEGIS agent can call a meeting. Post in a thread. Mail another agent for a UI question. Delegate a sub-task. Sub-agents are leaf nodes with no peers and no boss.
 
 **6. Failures isolate.**
-Sub-agent hangs → parent session degraded. Bolt hangs → bolt session ends, forge keeps going, the bead reverts to the queue.
+Sub-agent hangs → parent session degraded. Persistent agent hangs → that agent's session ends, the coordinating agent keeps going, the bead reverts to the queue.
 
 **Where sub-agents still earn their keep:** anything ephemeral and read-only. "Find every caller of this function." "Summarize this PR's diff." "Explore this directory." That's their fit. Production code shouldn't ship from a process that forgets its own name when the parent compacts.
