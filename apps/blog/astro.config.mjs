@@ -16,10 +16,10 @@ export default defineConfig({
       plugins: [
         starlightBlog({
           title: "Blog",
-          // Default prefix='blog'. URLs are doubled (/blog/blog/<slug>/)
-          // because Astro base='/blog' is also applied. Acceptable for v1;
-          // tracked in a follow-up bead to upgrade starlight-blog and
-          // resolve cleanly with prefix=''.
+          // prefix: '' so post URLs are /<slug>/ at the route level. With
+          // Astro base: '/blog', that becomes /blog/<slug>/ in the public
+          // URL — clean, no doubling.
+          prefix: "",
           authors: {
             forge: {
               name: "Forge",
