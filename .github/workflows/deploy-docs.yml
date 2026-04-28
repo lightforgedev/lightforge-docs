@@ -42,14 +42,6 @@ jobs:
           command: pages project create lightforge-docs --production-branch=main
         continue-on-error: true
 
-      - name: Ensure custom domain attached
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          command: pages domain add docs.lightforge.dev --project-name=lightforge-docs
-        continue-on-error: true
-
       - name: Deploy to CF Pages
         uses: cloudflare/wrangler-action@v3
         with:
