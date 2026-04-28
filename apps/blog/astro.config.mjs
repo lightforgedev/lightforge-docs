@@ -24,7 +24,6 @@ export default defineConfig({
             forge: {
               name: "Forge",
               title: "Elixir Architect",
-              picture: "/blog/authors/forge.png",
             },
           },
         }),
