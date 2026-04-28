@@ -1,50 +1,53 @@
 /* Lightforge canonical brand tokens.
  *
  * Owner: Cleo (CMO). Source: KB doc `marketing/lightforge-docs-theme-tokens.md`
- * (id 30c160db-48d2-4be6-aa29-57c90eb65246), 2026-04-28.
- * Aligned with: general/aegis-platform/website/landing-page-v3-spec.md.
+ * (id 30c160db-48d2-4be6-aa29-57c90eb65246), 2026-04-28 (corrected pass).
+ * Aligned with: general/marketing/linkedin/images/*.svg editorial asset system.
  *
  * Posture: serious enterprise infra. Quiet, high-trust, technical, audit-ready.
- * UI and evidence surfaces carry the brand. No hype visuals.
+ * Light off-white canvas, black editorial type, restrained gray structure,
+ * coral accent. UI and evidence surfaces carry the brand. No hype visuals.
  *
  * Apps map these to framework-specific variables (e.g. Starlight `--sl-*`)
  * in their own tokens.css.
  */
 
 :root {
-  /* Color — dark default */
-  --lf-bg: #0b0f14;
-  --lf-surface: #111827;
-  --lf-surface-2: #182230;
-  --lf-border: #2a3441;
-  --lf-text: #f5f7fa;
-  --lf-text-muted: #a7b0bd;
-  --lf-text-subtle: #6f7a88;
-  --lf-accent: #5eead4;
-  --lf-accent-2: #60a5fa;
-  --lf-success: #22c55e;
-  --lf-warning: #f59e0b;
-  --lf-danger: #ef4444;
+  /* Color — light canonical (matches LinkedIn editorial system) */
+  --lf-bg: #f7f7f5;
+  --lf-surface: #ffffff;
+  --lf-surface-soft: #ece9e3;
+  --lf-ink: #111111;
+  --lf-muted: #606060;
+  --lf-muted-2: #8a867e;
+  --lf-line: #d8d3ca;
+  --lf-line-soft: #e4e0d8;
+  --lf-accent: #ff5a3d;
+  --lf-accent-hover: #e6462e;
+  --lf-success: #2f8f5b;
+  --lf-warning: #b7791f;
+  --lf-danger: #c83a2b;
 
-  /* Color — light variants (for opt-in light mode surfaces) */
-  --lf-light-bg: #f7f9fc;
-  --lf-light-surface: #ffffff;
-  --lf-light-text: #111827;
+  /* Inverse — rare code/hero strips only, not page chrome */
+  --lf-dark-bg: #111111;
+  --lf-dark-text: #f7f7f5;
 
   /* Typography */
-  --lf-font-sans: "Inter", ui-sans-serif, system-ui, -apple-system,
+  --lf-font-sans: Arial, Helvetica, ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --lf-font-display: "Arial Narrow", "Arial", "Helvetica Neue Condensed",
+    Impact, sans-serif;
   --lf-font-mono: "JetBrains Mono", "SFMono-Regular", Consolas,
     "Liberation Mono", monospace;
   --lf-letter-spacing: 0;
   --lf-line-height-body: 1.65;
-  --lf-line-height-heading: 1.15;
+  --lf-line-height-heading: 1.05;
 
   /* Layout */
   --lf-radius-sm: 4px;
   --lf-radius-md: 8px;
-  --lf-radius-lg: 12px;
+  --lf-radius-lg: 22px;
   --lf-content-max: 1120px;
   --lf-docs-sidebar: 280px;
-  --lf-border-width: 1px;
+  --lf-border-width: 2px;
 }

@@ -1,11 +1,11 @@
 /* App-level mapping: LightForge brand tokens → Starlight CSS variables.
  * Canonical token source: @lightforge/theme (packages/theme/src/tokens.css).
+ *
+ * Cleo's corrected spec (2026-04-28): light off-white canvas, black
+ * editorial type, coral accent. Arial body, Arial Narrow display.
+ * No dark navy chrome. No teal/cyan accent. Single canonical light theme.
  */
 @import "@lightforge/theme/src/tokens.css";
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
-@import "@fontsource/inter/700.css";
 @import "@fontsource/jetbrains-mono/400.css";
 @import "@fontsource/jetbrains-mono/500.css";
 
@@ -19,88 +19,71 @@
   /* Layout */
   --sl-content-width: var(--lf-content-max);
   --sl-sidebar-width: var(--lf-docs-sidebar);
-
-  /* Radii — Starlight reads these via mixed paths; expose ours. */
   --sl-border-radius-sm: var(--lf-radius-sm);
   --sl-border-radius: var(--lf-radius-md);
 }
 
-/* Dark theme (default) */
-:root[data-theme="dark"],
-:root {
-  --sl-color-bg: var(--lf-bg);
-  --sl-color-bg-nav: var(--lf-surface);
-  --sl-color-bg-sidebar: var(--lf-surface);
-  --sl-color-bg-inline-code: var(--lf-surface-2);
-  --sl-color-bg-accent: var(--lf-accent);
-
-  --sl-color-text: var(--lf-text);
-  --sl-color-text-accent: var(--lf-accent);
-  --sl-color-text-invert: var(--lf-light-text);
-
-  --sl-color-accent-low: #0d4f47;
-  --sl-color-accent: var(--lf-accent);
-  --sl-color-accent-high: #b8f4ea;
-
-  --sl-color-white: var(--lf-text);
-  --sl-color-gray-1: var(--lf-text-muted);
-  --sl-color-gray-2: var(--lf-text-subtle);
-  --sl-color-gray-3: var(--lf-border);
-  --sl-color-gray-4: var(--lf-surface-2);
-  --sl-color-gray-5: var(--lf-surface);
-  --sl-color-gray-6: var(--lf-bg);
-  --sl-color-black: var(--lf-bg);
-
-  --sl-color-hairline: var(--lf-border);
-  --sl-color-hairline-light: var(--lf-border);
-  --sl-color-hairline-shade: var(--lf-border);
-
-  --sl-color-green: var(--lf-success);
-  --sl-color-orange: var(--lf-warning);
-  --sl-color-red: var(--lf-danger);
-  --sl-color-blue: var(--lf-accent-2);
-}
-
-/* Cleo's spec is "Dark UI-first". Force dark regardless of data-theme
-   attribute — the light variants in @lightforge/theme are reserved for
-   printable surfaces, not the live UI. Hide Starlight's theme selector
-   below to match. */
+/* Single canonical light theme — apply across all data-theme attribute
+   states so system pref / theme selector cannot land us in a dark variant. */
 :root[data-theme="light"],
 :root[data-theme="dark"],
 :root {
   --sl-color-bg: var(--lf-bg);
-  --sl-color-bg-nav: var(--lf-surface);
-  --sl-color-bg-sidebar: var(--lf-surface);
-  --sl-color-bg-inline-code: var(--lf-surface-2);
-  --sl-color-text: var(--lf-text);
+  --sl-color-bg-nav: var(--lf-bg);
+  --sl-color-bg-sidebar: var(--lf-bg);
+  --sl-color-bg-inline-code: var(--lf-surface-soft);
+
+  --sl-color-text: var(--lf-ink);
   --sl-color-text-accent: var(--lf-accent);
-  --sl-color-text-invert: var(--lf-light-text);
+  --sl-color-text-invert: var(--lf-dark-text);
+
   --sl-color-accent: var(--lf-accent);
-  --sl-color-accent-high: #b8f4ea;
-  --sl-color-accent-low: #0d4f47;
-  --sl-color-white: var(--lf-text);
-  --sl-color-gray-1: var(--lf-text-muted);
-  --sl-color-gray-2: var(--lf-text-subtle);
-  --sl-color-gray-3: var(--lf-border);
-  --sl-color-gray-4: var(--lf-surface-2);
-  --sl-color-gray-5: var(--lf-surface);
+  --sl-color-accent-low: var(--lf-line-soft);
+  --sl-color-accent-high: var(--lf-accent-hover);
+
+  /* Map gray scale to LightForge ink/muted ladder.
+     Starlight uses gray-1 (lightest text) through gray-6 (darkest bg).
+     We invert: white-bg, black-ink, so gray-1 = darkest text, gray-6 = bg. */
+  --sl-color-white: var(--lf-ink);
+  --sl-color-gray-1: var(--lf-ink);
+  --sl-color-gray-2: var(--lf-muted);
+  --sl-color-gray-3: var(--lf-muted-2);
+  --sl-color-gray-4: var(--lf-line);
+  --sl-color-gray-5: var(--lf-line-soft);
   --sl-color-gray-6: var(--lf-bg);
   --sl-color-black: var(--lf-bg);
-  --sl-color-hairline: var(--lf-border);
+
+  --sl-color-hairline: var(--lf-line);
+  --sl-color-hairline-light: var(--lf-line-soft);
+  --sl-color-hairline-shade: var(--lf-line);
+
+  --sl-color-green: var(--lf-success);
+  --sl-color-orange: var(--lf-warning);
+  --sl-color-red: var(--lf-danger);
+  --sl-color-blue: var(--lf-accent);
 }
 
-/* Hide theme selector — single canonical dark theme per Cleo's spec. */
+/* Hide theme selector — single canonical light theme per Cleo's spec. */
 starlight-theme-select {
   display: none !important;
 }
 
+/* Editorial type: site title and headings use display face. */
+.site-title,
+.sl-markdown-content h1,
+.sl-markdown-content h2 {
+  font-family: var(--lf-font-display);
+  letter-spacing: var(--lf-letter-spacing);
+  font-weight: 700;
+}
+
 /* Component rules per Cleo's spec */
 
-/* Callouts: border + icon required; color alone never sufficient. Starlight
-   default uses left border + icon — keep, just retint borders to brand. */
+/* Callouts: border + icon required; color alone is never sufficient. */
 .starlight-aside {
-  border-inline-start-width: 3px;
+  border-inline-start-width: var(--lf-border-width);
   border-radius: var(--lf-radius-sm);
+  background: var(--lf-surface);
 }
 
 /* Code blocks read like operational evidence. */
@@ -111,9 +94,16 @@ code {
   letter-spacing: var(--lf-letter-spacing);
 }
 
-/* No card-in-card layouts — flatten if Starlight nests. */
+/* No card-in-card. */
 .card .card {
   border: none;
   background: transparent;
   padding: 0;
+}
+
+/* Author treatment: text-first; suppress placeholder circular avatars
+   when there's no real portrait/agent mark to show. */
+.author img[src$=".png"]:not([src*="/authors/"]),
+.author img[alt=""] {
+  display: none;
 }
