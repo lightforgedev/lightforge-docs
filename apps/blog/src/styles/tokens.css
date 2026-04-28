@@ -189,18 +189,72 @@ main img[src*="/authors/forge"] {
   text-decoration-color: var(--lf-accent);
 }
 
-/* Sidebar / nav link active + hover (when sidebar is shown). */
-.sidebar a:hover,
-.sidebar-content a:hover,
-nav a:hover {
+/* Left sidebar — mirror Phoenix's .sidebar-nav-link rule exactly:
+   Inter body / 0.9375rem / weight 500 / color text-secondary / 0.5rem
+   0.75rem padding / 0.5rem radius / hover = sidebar-hover bg + ink text /
+   active (aria-current=page) = sidebar-active bg + accent + weight 600. */
+.sidebar-pane,
+.sidebar-content {
+  background: var(--lf-sidebar-bg);
+}
+.sidebar-pane a,
+.sidebar-content a {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-family: var(--lf-font-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--lf-text-secondary);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+.sidebar-pane a:hover,
+.sidebar-content a:hover {
   background: var(--lf-sidebar-hover);
+  color: var(--lf-ink);
+}
+.sidebar-pane a[aria-current="page"],
+.sidebar-content a[aria-current="page"],
+.sidebar-pane a.active {
+  background: var(--lf-sidebar-active);
+  color: var(--lf-accent);
+  font-weight: 600;
+}
+/* Group headings inside the sidebar (sections like 'Start here'). */
+.sidebar-pane summary,
+.sidebar-pane > ul > li > span,
+.sidebar-content > ul > li > span {
+  font-family: var(--lf-font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lf-muted);
+  padding: 0.5rem 0.75rem;
+}
+
+/* Right-sidebar TOC anchor links — same family/scale, lighter weight. */
+.right-sidebar a,
+starlight-toc a,
+mobile-starlight-toc a {
+  font-family: var(--lf-font-body);
+  font-size: 0.875rem;
+  color: var(--lf-text-secondary);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+.right-sidebar a:hover,
+starlight-toc a:hover,
+mobile-starlight-toc a:hover {
   color: var(--lf-accent);
 }
-[aria-current="page"],
-.sidebar a[aria-current="page"],
-.sidebar a.active {
-  background: var(--lf-sidebar-active) !important;
-  color: var(--lf-accent) !important;
+.right-sidebar a[aria-current="true"],
+starlight-toc a[aria-current="true"] {
+  color: var(--lf-accent);
   font-weight: 600;
 }
 
