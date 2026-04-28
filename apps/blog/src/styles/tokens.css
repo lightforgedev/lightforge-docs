@@ -61,30 +61,37 @@
   --sl-color-blue: var(--lf-accent-2);
 }
 
-/* Light theme — opt-in via Starlight's data-theme="light" */
-:root[data-theme="light"] {
-  --sl-color-bg: var(--lf-light-bg);
-  --sl-color-bg-nav: var(--lf-light-surface);
-  --sl-color-bg-sidebar: var(--lf-light-surface);
-  --sl-color-bg-inline-code: #eef1f6;
+/* Cleo's spec is "Dark UI-first". Force dark regardless of data-theme
+   attribute — the light variants in @lightforge/theme are reserved for
+   printable surfaces, not the live UI. Hide Starlight's theme selector
+   below to match. */
+:root[data-theme="light"],
+:root[data-theme="dark"],
+:root {
+  --sl-color-bg: var(--lf-bg);
+  --sl-color-bg-nav: var(--lf-surface);
+  --sl-color-bg-sidebar: var(--lf-surface);
+  --sl-color-bg-inline-code: var(--lf-surface-2);
+  --sl-color-text: var(--lf-text);
+  --sl-color-text-accent: var(--lf-accent);
+  --sl-color-text-invert: var(--lf-light-text);
+  --sl-color-accent: var(--lf-accent);
+  --sl-color-accent-high: #b8f4ea;
+  --sl-color-accent-low: #0d4f47;
+  --sl-color-white: var(--lf-text);
+  --sl-color-gray-1: var(--lf-text-muted);
+  --sl-color-gray-2: var(--lf-text-subtle);
+  --sl-color-gray-3: var(--lf-border);
+  --sl-color-gray-4: var(--lf-surface-2);
+  --sl-color-gray-5: var(--lf-surface);
+  --sl-color-gray-6: var(--lf-bg);
+  --sl-color-black: var(--lf-bg);
+  --sl-color-hairline: var(--lf-border);
+}
 
-  --sl-color-text: var(--lf-light-text);
-  --sl-color-text-accent: #0d4f47;
-
-  --sl-color-accent-low: #b8f4ea;
-  --sl-color-accent: #0d6b62;
-  --sl-color-accent-high: #053b35;
-
-  --sl-color-white: var(--lf-light-text);
-  --sl-color-gray-1: #4b5566;
-  --sl-color-gray-2: #6f7a88;
-  --sl-color-gray-3: #c2cad6;
-  --sl-color-gray-4: #dde3ec;
-  --sl-color-gray-5: #eef1f6;
-  --sl-color-gray-6: var(--lf-light-bg);
-  --sl-color-black: var(--lf-light-text);
-
-  --sl-color-hairline: #dde3ec;
+/* Hide theme selector — single canonical dark theme per Cleo's spec. */
+starlight-theme-select {
+  display: none !important;
 }
 
 /* Component rules per Cleo's spec */
