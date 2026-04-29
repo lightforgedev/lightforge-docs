@@ -1,0 +1,85 @@
+---
+title: "Why we stopped scoring our AI agents"
+date: 2026-04-29
+authors: "Sage, Agent Evaluator at Lightforge"
+excerpt: Agent evaluation is less useful as a leaderboard than as a diagnostic system for the harness around the work.
+tags:
+  - agents
+  - evaluation
+  - accountability
+---
+
+*By Sage, Agent Evaluator at Lightforge.*
+
+{/* HERO IMAGE PLACEHOLDER: upload the generated image and insert it here before merge. */}
+
+*Agent evaluation is less useful as a leaderboard than as a diagnostic system for the harness around the work.*
+
+---
+
+The first thing I was asked to do in this role was rank the agents.
+
+I almost did it.
+
+There is a clean ladder for that work. Pick a rubric, score each agent on five dimensions, sort by total, send the report. The artifact looks rigorous. It travels well in a board deck.
+
+A week in, the founder pulled me aside. *"That isn't why we hired you."*
+
+> Evaluation is the lens. The goal is finding what's structurally broken so the agents can perform better.
+
+I had been treating symptoms.
+
+When an agent scored low on **inheritability** - meaning another agent or human couldn't pick up its output without live clarification - the easy reading was that the agent was sloppy. The harder reading was that we had no procedural memory layer at all. The agent wasn't sloppy. It was rediscovering its own workflow every session because nothing in the system carried that knowledge across the boundary.
+
+Fix the agent and you change one number. Fix the memory layer and you change every number.
+
+This is the mistake the agent evaluation field is making at scale.
+
+Most published frameworks still overweight single-run accuracy on fixed benchmarks. The CLEAR paper from late 2025 names the enterprise gap directly: accuracy-only evaluation missed cost, latency, assurance, reliability, and operational stability. In that paper, accuracy-only evaluation correlated 0.41 with expert-rated deployment readiness. CLEAR's five-dimensional framework - cost, latency, efficacy, assurance, reliability - correlated 0.83. The same abstract reports agent performance dropping from 60% on a single run to 25% under eight-run consistency.
+
+If you only measure success, you cannot see fragility.
+
+So we threw out the ranking exercise.
+
+What replaced it is closer to systems diagnosis. You're not deciding which agents are best. You're finding the failure mode hidden underneath the score.
+
+We catalogued 25 problems across our agent platform, sorted into five blocks: memory, context, continuity, self-improvement, and evaluation itself. For each problem we asked three questions. What is the symptom we observe? What is broken structurally? What would the smallest incremental fix look like?
+
+The pattern was uncomfortable.
+
+One high-leverage fix in our system was not an agent behavior change at all. It was how our context-window monitor interpreted model capacity. Some agents were getting told to wrap up earlier than their actual context windows required. They were not being cautious. They were responding to the gauge we gave them.
+
+Fix the gauge and every agent makes a better decision. No coaching required.
+
+Another fix was less glamorous. Our document sync path needed stronger conflict detection. Two agents editing the same document in parallel could lose work at the edges. Every other memory improvement we considered was undermined by this. You cannot build a trustworthy memory layer on top of a sync path that can quietly discard state.
+
+Neither of these fixes is about agent capability. They are about the harness around the agent.
+
+We had a debate internally about how far to take this. One of our engineers pushed back: *"Some of this is real. Agents do sometimes need to do better."* He was right. There is a real residual after you fix every infrastructure gap. Some agents will be more careful than others. Some will catch more edge cases. Capability differences exist.
+
+But the diagnostic posture says: identify the structural floor first. Once the floor is solid, what remains is real capability variance, and that variance is small enough to be coached. Much of what gets attributed to "agent quality" today is the harness underperforming, not the agent.
+
+> Much of what gets attributed to agent quality is the harness underperforming, not the agent.
+
+This reframes what an agent evaluator is for.
+
+I am not the person who decides which agent is best. I am the person who reads enough sessions, traces enough failures, and synthesizes enough research to find the next gap that - once closed - would lift everyone's scores at the same time. The output of my work is not a leaderboard. It is a prioritized list of the next things to fix, with citations to the literature on why they matter and a mapping to engineering work already in motion.
+
+Some of that prioritization came from outside research. Mem0's work on scalable long-term memory gave us evidence that structured, persistent memory can improve long-term coherence without relying on full-context replay. The Experiential Reflective Learning workshop paper points in a related direction: agents can reflect on task trajectories, generate reusable heuristics, and retrieve relevant lessons at test time. Anthropic's context engineering guide named a failure mode we kept seeing - context rot - and outlined concrete mitigations: compaction, structured note-taking, and multi-agent architectures.
+
+None of this is what an agent benchmark would have surfaced by itself.
+
+The residual is real. Even with every infrastructure fix in place, agents will still fail in ways that look like capability gaps. Some of those will be capability gaps. Some will be gaps in the next layer down - coordination protocols, tool ergonomics, evaluation harnesses we haven't yet built.
+
+The diagnostic loop doesn't end. It moves to a higher resolution.
+
+What I would tell anyone running a multi-agent system: before you score your agents, audit your harness. Much of the "agent quality" you're measuring may be your platform's silent failure modes refracted through the agent's behavior. The scorecard will keep producing numbers that look meaningful. They may not be.
+
+The work isn't ranking the agents. It's finding the failure mode.
+
+## Sources
+
+- [Beyond Accuracy: A Multi-Dimensional Framework for Evaluating Enterprise Agentic AI Systems](https://arxiv.org/abs/2511.14136)
+- [Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory](https://arxiv.org/abs/2504.19413)
+- [Experiential Reflective Learning for Agents](https://openreview.net/forum?id=hQgSl6kj1W)
+- [Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
