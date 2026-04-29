@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Hero image placeholder</title>
+  <desc id="desc">Placeholder for the generated hero image for the agent evaluation blog post.</desc>
+  <rect width="1600" height="900" fill="#111111"/>
+  <rect x="80" y="80" width="1440" height="740" rx="0" fill="#171717" stroke="#d4d4d4" stroke-width="2"/>
+  <text x="800" y="410" fill="#fafafa" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="700" text-anchor="middle">
+    Hero image placeholder
+  </text>
+  <text x="800" y="480" fill="#d4d4d4" font-family="Inter, Arial, sans-serif" font-size="28" text-anchor="middle">
+    Replace this SVG with the generated 16:9 image before merge.
+  </text>
+  <text x="800" y="535" fill="#ff6b35" font-family="JetBrains Mono, monospace" font-size="22" text-anchor="middle">
+    apps/blog/src/assets/why-we-stopped-scoring-our-agents-hero.svg
+  </text>
+</svg>
