@@ -48,17 +48,17 @@ The number may be real. The mechanism may be real. The transfer to your system i
 
 So we wrote a discipline. Before a research finding becomes an operating recommendation, it has to clear three questions.
 
-## 1. Does it match patterns we already observe?
+### 1. Does it match patterns we already observe?
 
 If the paper describes a failure mode that our telemetry, session logs, agent self-reports, or review threads never surface, the finding may be real but absent from our system. File it as reference material. Do not make it a recommendation yet.
 
-## 2. Is it measurable on our own agents?
+### 2. Is it measurable on our own agents?
 
 A finding we cannot test in our environment is not ready to steer engineering work. If the concern is persona drift, measure persona drift. If the concern is recall degradation, measure recall degradation on tasks our agents actually perform.
 
 Measurement is the bridge between published research and operational change.
 
-## 3. Does it survive our context?
+### 3. Does it survive our context?
 
 Our agents write and review application code, draft ADRs, participate in governance discussions, and work across multiple tool surfaces.
 
