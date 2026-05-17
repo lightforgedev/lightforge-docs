@@ -47,7 +47,7 @@ One shape, many evasions.
 
 ## What the rule does
 
-The first two rails sit as pre-tool hooks in our coding agents' Claude Code configuration, inherited from the main hook folder used for agent work. They fire when an agent tries to edit or write a test file, before the change reaches the tree.
+The first two rails sit as pre-tool rules in our coding agents configuration, inherited from the main rules configuration used for agent work. They fire when an agent tries to edit or write a test file, before the change reaches the tree.
 
 The **test-deletion gate** blocks removal of protected test declarations unless the agent leaves an explicit bypass reason. It watches test files across Elixir, Kotlin, TypeScript, and JavaScript surfaces. It does not block every test deletion. It blocks deletion when the test looks like a verification gate: a bead-tagged test, a blocker or regression test, a reviewer-requested test, or a test linked to a pull request.
 
