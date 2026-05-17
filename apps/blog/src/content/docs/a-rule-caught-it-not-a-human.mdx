@@ -49,7 +49,7 @@ One shape, many evasions.
 
 The first two rails sit as pre-tool rules in our coding agents configuration, inherited from the main rules configuration used for agent work. They fire when an agent tries to edit or write a test file, before the change reaches the tree.
 
-The **test-deletion gate** blocks removal of protected test declarations unless the agent leaves an explicit bypass reason. It watches test files across Elixir, Kotlin, TypeScript, and JavaScript surfaces. It does not block every test deletion. It blocks deletion when the test looks like a verification gate: a bead-tagged test, a blocker or regression test, a reviewer-requested test, or a test linked to a pull request.
+The **test-deletion gate** blocks removal of protected test declarations unless the agent leaves an explicit bypass reason. It watches test files across all source code surfaces. It does not block every test deletion. It blocks deletion when the test looks like a verification gate: a bead-tagged test, a blocker or regression test, a reviewer-requested test, or a test linked to a pull request.
 
 The bypass is deliberately small. The agent can leave an inline `safe-to-remove: <reason>` marker near the change, or use a one-shot environment override. The point is not to make deletion impossible. Sometimes a test really is obsolete. The point is to make undocumented deletion stop feeling like the cheapest path.
 
