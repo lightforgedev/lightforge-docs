@@ -9,8 +9,8 @@
   color-scheme: light;
   --lf-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --lf-font-heading: var(--lf-font-body);
-  /* lightforge.dev landing wordmark (.lf-logo). */
-  --lf-font-wordmark: "Oswald", var(--lf-font-body);
+  /* lightforge.dev landing wordmark (.l2-brand__org, --l2-display). */
+  --lf-font-wordmark: "Bricolage Grotesque Variable", "Bricolage Grotesque", var(--lf-font-body);
   --lf-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --lf-letter-spacing: 0;
   --lf-line-height-body: 1.6;

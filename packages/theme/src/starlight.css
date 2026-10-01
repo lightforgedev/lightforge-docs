@@ -5,7 +5,7 @@
 @import "@fontsource/inter/700.css";
 @import "@fontsource/jetbrains-mono/400.css";
 @import "@fontsource/jetbrains-mono/500.css";
-@import "@fontsource/oswald/700.css";
+@import "@fontsource-variable/bricolage-grotesque/index.css";
 :root {
   --sl-font: var(--lf-font-body);
   --sl-font-mono: var(--lf-font-mono);
@@ -297,16 +297,17 @@ starlight-toc a[aria-current="true"] {
   align-items: center;
   color: var(--lf-sheet-ink);
   font-family: var(--lf-font-wordmark);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
   line-height: 1;
   text-decoration: none;
   white-space: nowrap;
 }
-/* Wordmark: "Light" in ink (white on blueprint), "Forge" in brand orange. */
+/* Wordmark: "Light" in ink (white on blueprint), "Forge" in the redline
+   orange, as on the lightforge.dev landing (.l2-brand__org b). */
 .lf-brand__forge {
-  color: var(--lf-brand-orange);
+  color: var(--lf-sheet-red-text);
 }
 .lf-site-nav {
   display: none;
