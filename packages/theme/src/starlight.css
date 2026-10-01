@@ -23,9 +23,9 @@
 :root,
 :root[data-theme="light"],
 :root[data-theme="dark"] {
-  --sl-color-bg: var(--lf-bg);
-  --sl-color-bg-nav: var(--lf-surface);
-  --sl-color-bg-sidebar: var(--lf-sidebar-bg);
+  --sl-color-bg: var(--lf-sheet-vellum);
+  --sl-color-bg-nav: var(--lf-sheet-paper);
+  --sl-color-bg-sidebar: var(--lf-sheet-paper);
   --sl-color-bg-inline-code: var(--lf-surface-elevated);
 
   --sl-color-text: var(--lf-ink);
@@ -42,12 +42,12 @@
   --sl-color-gray-3: var(--lf-muted);
   --sl-color-gray-4: var(--lf-line);
   --sl-color-gray-5: var(--lf-line-soft);
-  --sl-color-gray-6: var(--lf-bg);
-  --sl-color-black: var(--lf-bg);
+  --sl-color-gray-6: var(--lf-sheet-vellum);
+  --sl-color-black: var(--lf-sheet-vellum);
 
-  --sl-color-hairline: var(--lf-line);
-  --sl-color-hairline-light: var(--lf-line-soft);
-  --sl-color-hairline-shade: var(--lf-line);
+  --sl-color-hairline: var(--lf-sheet-line-3);
+  --sl-color-hairline-light: var(--lf-sheet-line-3);
+  --sl-color-hairline-shade: var(--lf-sheet-line-2);
 
   --sl-color-green: var(--lf-success);
   --sl-color-orange: var(--lf-warning);
@@ -176,11 +176,8 @@ main img[src*="/authors/forge"] {
   text-decoration-color: var(--lf-accent);
 }
 
-/* v3 surface, selected-row tint, and wrapping navigation labels. */
-.sidebar-pane,
-.sidebar-content {
-  background: var(--lf-sidebar-bg);
-}
+/* Selected-row tint and wrapping navigation labels; the pane itself is the
+   drawing sheet (see the end of this file). */
 .sidebar-pane a,
 .sidebar-content a {
   display: flex;
@@ -191,33 +188,36 @@ main img[src*="/authors/forge"] {
   font-family: var(--lf-font-body);
   font-size: 0.9375rem;
   font-weight: 500;
-  color: var(--lf-text-secondary);
+  color: var(--lf-sheet-ink-2);
   text-decoration: none;
   overflow-wrap: anywhere;
   transition: background-color 150ms ease, color 150ms ease;
 }
 .sidebar-pane a:hover,
 .sidebar-content a:hover {
-  background: var(--lf-sidebar-hover);
-  color: var(--lf-ink);
+  background: color-mix(in srgb, var(--lf-sheet-ink) 5%, transparent);
+  color: var(--lf-sheet-ink);
 }
+/* The current page is redlined: a pen stroke down the left edge. */
 .sidebar-pane a[aria-current="page"],
 .sidebar-content a[aria-current="page"],
 .sidebar-pane a.active {
-  background: var(--lf-sidebar-active);
-  color: var(--lf-accent);
+  background: color-mix(in srgb, var(--lf-sheet-red) 9%, transparent);
+  box-shadow: inset 2px 0 0 var(--lf-sheet-red);
+  border-radius: 0 0.5rem 0.5rem 0;
+  color: var(--lf-sheet-red-text);
   font-weight: 600;
 }
-/* Group headings inside the sidebar (sections like 'Start here'). */
+/* Group headings read as sheet numbers: mono, tracked, uppercase. */
 .sidebar-pane summary,
 .sidebar-pane > ul > li > span,
 .sidebar-content > ul > li > span {
-  font-family: var(--lf-font-body);
+  font-family: var(--lf-font-mono);
   font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--lf-muted);
+  color: var(--lf-sheet-ink-3);
   padding: 0.5rem 0.75rem;
 }
 
@@ -272,24 +272,124 @@ pre[data-language="mermaid"].mermaid-failed {
   opacity: 1;
 }
 
-/* Connect login glow stays on the page canvas; reading surfaces stay solid. */
+/* Connect sign-in drawing sheet. Left panel (header + sidebar) is the
+   drafting paper: grid lines, a hairline frame with ticks. Right panel
+   (content) is the vellum laid over it: the grid reduced to its
+   intersections and a faint redline glow, so the writing stays the louder
+   half. Blueprint in dark. */
 body {
-  background: var(--lf-login-background), var(--lf-bg);
-  background-repeat: no-repeat;
   min-height: 100dvh;
+  background-color: var(--lf-sheet-vellum);
+  background-image:
+    radial-gradient(
+      circle at 1px 1px,
+      var(--lf-sheet-dot) 1px,
+      transparent 1.2px
+    ),
+    radial-gradient(
+      60% 50% at 60% 40%,
+      color-mix(in srgb, var(--lf-sheet-red) 7%, transparent),
+      transparent 70%
+    );
+  background-attachment: scroll, fixed;
+  background-position:
+    -1px -1px,
+    center;
+  background-size:
+    var(--lf-sheet-grid-size) var(--lf-sheet-grid-size),
+    100% 100%;
 }
-.main-frame {
+.main-frame,
+.right-sidebar,
+.content-panel + .content-panel {
   background: transparent;
 }
+.page > .header,
+.sidebar-pane {
+  background-color: var(--lf-sheet-paper);
+  background-image:
+    linear-gradient(var(--lf-sheet-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--lf-sheet-grid) 1px, transparent 1px);
+  background-position: -1px -1px;
+  background-size: var(--lf-sheet-grid-size) var(--lf-sheet-grid-size);
+}
+.page > .header {
+  border-bottom: 1px solid var(--lf-sheet-line-2);
+}
+.site-title {
+  color: var(--lf-sheet-ink);
+}
+@media (min-width: 50rem) {
+  /* The sheet frame: an inset hairline with drawing-set ticks along the
+     left edge. Painted on the pane's box, so it stays put as nav scrolls. */
+  .sidebar-pane {
+    border-inline-end: 1px solid var(--lf-sheet-line-3);
+    background-image:
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0 calc(100% / 6 - 1px),
+        var(--lf-sheet-line-2) calc(100% / 6 - 1px) calc(100% / 6)
+      ),
+      linear-gradient(var(--lf-sheet-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--lf-sheet-grid) 1px, transparent 1px);
+    background-position:
+      11px 10px,
+      -1px -1px,
+      -1px -1px;
+    background-repeat: no-repeat, repeat, repeat;
+    background-size:
+      6px calc(100% - 20px),
+      var(--lf-sheet-grid-size) var(--lf-sheet-grid-size),
+      var(--lf-sheet-grid-size) var(--lf-sheet-grid-size);
+    box-shadow:
+      inset 0 0 0 10px var(--lf-sheet-paper),
+      inset 0 0 0 11px var(--lf-sheet-line-3);
+  }
+  /* Registration marks: the four corners of the overlay sheet. */
+  .main-pane {
+    position: relative;
+    isolation: isolate;
+  }
+  .main-pane::before {
+    position: absolute;
+    z-index: -1;
+    inset: 1.5rem;
+    background:
+      linear-gradient(var(--lf-sheet-line-2), var(--lf-sheet-line-2)) top left / 14px 1px,
+      linear-gradient(var(--lf-sheet-line-2), var(--lf-sheet-line-2)) top left / 1px 14px,
+      linear-gradient(var(--lf-sheet-line-2), var(--lf-sheet-line-2)) top right / 14px 1px,
+      linear-gradient(var(--lf-sheet-line-2), var(--lf-sheet-line-2)) top right / 1px 14px,
+      linear-gradient(var(--lf-sheet-line-2), var(--lf-sheet-line-2)) bottom left / 14px 1px,
+      linear-gradient(var(--lf-sheet-line-2), var(--lf-sheet-line-2)) bottom left / 1px 14px,
+      linear-gradient(var(--lf-sheet-line-2), var(--lf-sheet-line-2)) bottom right / 14px 1px,
+      linear-gradient(var(--lf-sheet-line-2), var(--lf-sheet-line-2)) bottom right / 1px 14px;
+    background-repeat: no-repeat;
+    content: "";
+    pointer-events: none;
+  }
+}
+/* Article titles take the sign-in claim's weight and tracking. */
+h1#_top {
+  color: var(--lf-sheet-ink);
+  font-weight: 650;
+  letter-spacing: -0.028em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+.sl-markdown-content > p:first-of-type {
+  color: var(--lf-sheet-ink-2);
+  text-wrap: pretty;
+}
+/* Cards are the sign-in form: the one solid surface on the vellum. */
 .card,
 .sl-link-card {
   background: var(--lf-surface);
-  border: 1px solid var(--lf-line);
+  border: 1px solid var(--lf-sheet-line-3);
   border-radius: var(--lf-radius-lg);
-  box-shadow: var(--lf-shadow);
+  box-shadow: var(--lf-shadow-card);
 }
 .sl-link-card:hover {
-  border-color: var(--lf-accent);
+  border-color: var(--lf-sheet-red);
 }
 .sl-markdown-content .sl-link-card a {
   color: var(--lf-ink);

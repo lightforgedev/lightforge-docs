@@ -1,6 +1,8 @@
 /* AEGIS v3 palette: aegis-phoenix-ui-components assets/css/tokens.css
  * at 3e754d58e3bfd258157eb272d924ec95c97eb193.
- * Background: Connect .login-page at 6f0e71b75b1ffee991f5faf59b5abfad564ae610.
+ * Drawing sheet: Connect sign-in (.login-sheet / .login-gate, --ds-sheet-*)
+ * at aegis-connect-ui e33fd7b. Paper + grid is the left panel (sidebar),
+ * vellum + dot grid is the right panel (content). Blueprint in dark.
  * Starlight owns data-theme and system-preference handling.
  */
 :root {
@@ -42,7 +44,19 @@
   --lf-sidebar-active: #fff1eb;
   --lf-sidebar-hover: var(--lf-surface-elevated);
   --lf-shadow: 0 1px 3px rgb(23 23 23 / 6%), 0 4px 12px -2px rgb(23 23 23 / 10%);
-  --lf-login-background: radial-gradient(circle at 50% -10%, color-mix(in srgb, var(--lf-brand-orange) 16%, transparent), transparent 26rem);
+  --lf-sheet-paper: #f4f1ea;
+  --lf-sheet-vellum: #faf8f3;
+  --lf-sheet-ink: #1b1914;
+  --lf-sheet-ink-2: #48443b;
+  --lf-sheet-ink-3: #635d51;
+  --lf-sheet-line-2: rgb(42 39 32 / 45%);
+  --lf-sheet-line-3: rgb(42 39 32 / 16%);
+  --lf-sheet-grid: rgb(42 39 32 / 4.5%);
+  --lf-sheet-dot: rgb(42 39 32 / 14%);
+  --lf-sheet-red: #d9531c;
+  --lf-sheet-red-text: #a83a0b;
+  --lf-sheet-grid-size: 24px;
+  --lf-shadow-card: 0 1px 2px rgb(27 25 20 / 5%), 0 12px 32px -8px rgb(27 25 20 / 14%);
 }
 
 :root[data-theme="dark"] {
@@ -69,4 +83,16 @@
   --lf-sidebar-active: #38241e;
   --lf-sidebar-hover: rgb(255 255 255 / 4%);
   --lf-shadow: 0 2px 14px rgb(0 0 0 / 24%);
+  --lf-sheet-paper: #0e1722;
+  --lf-sheet-vellum: #121d2a;
+  --lf-sheet-ink: #eef2f6;
+  --lf-sheet-ink-2: #bac5d1;
+  --lf-sheet-ink-3: #93a2b3;
+  --lf-sheet-line-2: rgb(214 223 233 / 46%);
+  --lf-sheet-line-3: rgb(214 223 233 / 16%);
+  --lf-sheet-grid: rgb(150 185 220 / 6%);
+  --lf-sheet-dot: rgb(150 185 220 / 16%);
+  --lf-sheet-red: #ff7a45;
+  --lf-sheet-red-text: #ff9b72;
+  --lf-shadow-card: 0 1px 2px rgb(0 0 0 / 30%), 0 16px 40px -8px rgb(0 0 0 / 45%);
 }
