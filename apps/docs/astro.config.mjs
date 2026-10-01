@@ -8,7 +8,7 @@ export default defineConfig({
   site: "https://docs.lightforge.dev",
   integrations: [
     starlight({
-      title: "Lightforge Docs",
+      title: "LightForge Docs",
       description:
         "Documentation for Saathi, AEGIS Platform, API references, and governance.",
       sidebar: [
@@ -37,12 +37,15 @@ export default defineConfig({
       ],
       plugins: [
         starlightLlmsTxt({
-          projectName: "Lightforge",
+          projectName: "LightForge",
           description:
             "Lightforge.dev — Saathi voice agent and AEGIS agent platform. This site is the canonical documentation surface; agents may consume any page as raw Markdown by appending `.md` to the URL.",
         }),
       ],
       customCss: ["./src/styles/tokens.css"],
+      components: {
+        SiteTitle: "@lightforge/theme/src/components/SiteTitle.astro",
+      },
     }),
   ],
 });

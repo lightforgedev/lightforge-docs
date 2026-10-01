@@ -1,0 +1,32 @@
+---
+// Header brand + cross-site nav, matching the lightforge.dev landing header:
+// the "LightForge" wordmark (Oswald 700), then the sites, the current one
+// redlined. Site titles are "LightForge <Surface>".
+const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
+const [brand, ...rest] = siteTitle.split(" ");
+const surface = rest.join(" ");
+const links = [
+  { label: "Home", href: "https://lightforge.dev/" },
+  { label: "Docs", href: "https://docs.lightforge.dev/" },
+  { label: "Blog", href: "https://lightforge.dev/blog/" },
+];
+---
+
+<div class="lf-brand">
+  <a href={siteTitleHref} class="site-title lf-brand__title">
+    <span translate="no">{brand}</span>
+    {surface && <span class="sr-only">{surface}</span>}
+  </a>
+  <nav class="lf-site-nav" aria-label="LightForge sites">
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          aria-current={link.label === surface ? "page" : undefined}
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+</div>

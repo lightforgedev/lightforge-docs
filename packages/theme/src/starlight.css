@@ -5,6 +5,7 @@
 @import "@fontsource/inter/700.css";
 @import "@fontsource/jetbrains-mono/400.css";
 @import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/oswald/700.css";
 :root {
   --sl-font: var(--lf-font-body);
   --sl-font-mono: var(--lf-font-mono);
@@ -181,7 +182,7 @@ main img[src*="/authors/forge"] {
 .sidebar-pane a,
 .sidebar-content a {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.625rem;
   padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
@@ -221,25 +222,129 @@ main img[src*="/authors/forge"] {
   padding: 0.5rem 0.75rem;
 }
 
-/* Right-sidebar TOC anchor links — same family/scale, lighter weight. */
+/* Right panel ("On this page"): the sign-in title block. A mono sheet label
+   over a ruled rail; the current section is redlined on the rail. */
+.right-sidebar-panel {
+  padding: 2rem 1.25rem 2rem 1.5rem;
+}
+starlight-toc nav > h2,
+.right-sidebar h2 {
+  margin: 0 0 0.75rem;
+  border-bottom: 1px solid var(--lf-sheet-line-2);
+  padding-bottom: 0.625rem;
+  color: var(--lf-sheet-ink-3);
+  font-family: var(--lf-font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+starlight-toc nav > ul {
+  border-inline-start: 1px solid var(--lf-sheet-line-3);
+  padding: 0;
+}
+starlight-toc ul {
+  list-style: none;
+  margin: 0;
+}
 .right-sidebar a,
 starlight-toc a,
 mobile-starlight-toc a {
   font-family: var(--lf-font-body);
   font-size: 0.875rem;
-  color: var(--lf-text-secondary);
+  color: var(--lf-sheet-ink-2);
   text-decoration: none;
-  transition: color 150ms ease;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease;
+}
+starlight-toc a {
+  display: block;
+  margin-inline-start: -1px;
+  border-inline-start: 2px solid transparent;
+  border-radius: 0;
+  padding: 0.3rem 0 0.3rem calc(0.875rem + var(--depth, 0) * 0.875rem);
+  line-height: 1.4;
 }
 .right-sidebar a:hover,
 starlight-toc a:hover,
 mobile-starlight-toc a:hover {
-  color: var(--lf-accent);
+  color: var(--lf-sheet-ink);
+}
+starlight-toc a:hover {
+  border-inline-start-color: var(--lf-sheet-line-2);
 }
 .right-sidebar a[aria-current="true"],
-starlight-toc a[aria-current="true"] {
-  color: var(--lf-accent);
+starlight-toc a[aria-current="true"],
+mobile-starlight-toc a[aria-current="true"] {
+  color: var(--lf-sheet-red-text);
   font-weight: 600;
+}
+starlight-toc a[aria-current="true"] {
+  border-inline-start-color: var(--lf-sheet-red);
+}
+
+/* Header brand: the lightforge.dev landing wordmark, then the cross-site
+   nav. */
+.lf-brand {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  min-width: 0;
+}
+.lf-brand__title.site-title {
+  display: flex;
+  align-items: center;
+  color: var(--lf-sheet-ink);
+  font-family: var(--lf-font-wordmark);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.lf-site-nav {
+  display: none;
+  gap: 0.25rem;
+}
+.lf-site-nav a {
+  padding: 0.375rem 0.625rem;
+  color: var(--lf-sheet-ink-2);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.lf-site-nav a[aria-current="page"] {
+  color: var(--lf-sheet-ink);
+  font-weight: 600;
+  box-shadow: inset 0 -2px 0 var(--lf-sheet-red);
+}
+@media (min-width: 72rem) {
+  .lf-site-nav {
+    display: flex;
+  }
+}
+
+/* Sidebar entries carry drawing-set index numbers (01, 02, …) per list. */
+.sidebar-content ul {
+  counter-reset: lf-sheet;
+}
+.sidebar-content a {
+  counter-increment: lf-sheet;
+}
+.sidebar-content a::before {
+  flex: none;
+  min-width: 1.5rem;
+  color: var(--lf-sheet-ink-3);
+  content: counter(lf-sheet, decimal-leading-zero);
+  font-family: var(--lf-font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.sidebar-content a[aria-current="page"]::before {
+  color: var(--lf-sheet-red-text);
 }
 
 /* Header nav link treatment (top bar). */
@@ -320,30 +425,8 @@ body {
   color: var(--lf-sheet-ink);
 }
 @media (min-width: 50rem) {
-  /* The sheet frame: an inset hairline with drawing-set ticks along the
-     left edge. Painted on the pane's box, so it stays put as nav scrolls. */
   .sidebar-pane {
     border-inline-end: 1px solid var(--lf-sheet-line-3);
-    background-image:
-      repeating-linear-gradient(
-        to bottom,
-        transparent 0 calc(100% / 6 - 1px),
-        var(--lf-sheet-line-2) calc(100% / 6 - 1px) calc(100% / 6)
-      ),
-      linear-gradient(var(--lf-sheet-grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--lf-sheet-grid) 1px, transparent 1px);
-    background-position:
-      11px 10px,
-      -1px -1px,
-      -1px -1px;
-    background-repeat: no-repeat, repeat, repeat;
-    background-size:
-      6px calc(100% - 20px),
-      var(--lf-sheet-grid-size) var(--lf-sheet-grid-size),
-      var(--lf-sheet-grid-size) var(--lf-sheet-grid-size);
-    box-shadow:
-      inset 0 0 0 10px var(--lf-sheet-paper),
-      inset 0 0 0 11px var(--lf-sheet-line-3);
   }
   /* Registration marks: the four corners of the overlay sheet. */
   .main-pane {
