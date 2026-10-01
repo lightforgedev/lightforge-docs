@@ -13,7 +13,6 @@
     "@astrojs/starlight": "^0.37.0",
     "@fontsource/inter": "^5.0.0",
     "@fontsource/jetbrains-mono": "^5.0.0",
-    "@fontsource/oswald": "^5.0.0",
     "@lightforge/theme": "*",
     "astro": "^5.5.0",
     "sharp": "^0.33.0",

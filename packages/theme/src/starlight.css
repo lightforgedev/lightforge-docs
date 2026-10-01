@@ -1,0 +1,321 @@
+@import "./tokens.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+:root {
+  --sl-font: var(--lf-font-body);
+  --sl-font-mono: var(--lf-font-mono);
+  --sl-line-height: var(--lf-line-height-body);
+  --sl-line-height-headings: var(--lf-line-height-heading);
+  --sl-content-width: var(--lf-content-max);
+  --sl-sidebar-width: var(--lf-docs-sidebar);
+  --sl-border-radius-sm: var(--lf-radius-sm);
+  --sl-border-radius: var(--lf-radius-md);
+}
+
+/* Map LightForge tokens → Starlight variables for both light and dark.
+   Starlight sets data-theme="light"|"dark" on :root; @lightforge/theme
+   already swaps --lf-* values under :root[data-theme="dark"]. So we map
+   once, the values flow. */
+:root,
+:root[data-theme="light"],
+:root[data-theme="dark"] {
+  --sl-color-bg: var(--lf-bg);
+  --sl-color-bg-nav: var(--lf-surface);
+  --sl-color-bg-sidebar: var(--lf-sidebar-bg);
+  --sl-color-bg-inline-code: var(--lf-surface-elevated);
+
+  --sl-color-text: var(--lf-ink);
+  --sl-color-text-accent: var(--lf-accent);
+  --sl-color-text-invert: var(--lf-text-on-accent);
+
+  --sl-color-accent: var(--lf-primary);
+  --sl-color-accent-low: var(--lf-sidebar-active);
+  --sl-color-accent-high: var(--lf-accent);
+
+  --sl-color-white: var(--lf-ink);
+  --sl-color-gray-1: var(--lf-ink);
+  --sl-color-gray-2: var(--lf-text-secondary);
+  --sl-color-gray-3: var(--lf-muted);
+  --sl-color-gray-4: var(--lf-line);
+  --sl-color-gray-5: var(--lf-line-soft);
+  --sl-color-gray-6: var(--lf-bg);
+  --sl-color-black: var(--lf-bg);
+
+  --sl-color-hairline: var(--lf-line);
+  --sl-color-hairline-light: var(--lf-line-soft);
+  --sl-color-hairline-shade: var(--lf-line);
+
+  --sl-color-green: var(--lf-success);
+  --sl-color-orange: var(--lf-warning);
+  --sl-color-red: var(--lf-danger);
+  --sl-color-blue: var(--lf-accent-teal);
+}
+
+/* v3 uses Inter for both the shell and editorial headings. */
+.site-title,
+h1#_top,
+.hero h1,
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3 {
+  font-family: var(--lf-font-heading);
+  letter-spacing: var(--lf-letter-spacing);
+  font-weight: 600;
+}
+
+/* Reasonable blog title sizes — Cleo's earlier pass scaled H1 to ~7rem
+   which is too large for blog reading. Aligned with typical editorial. */
+.sl-markdown-content h1,
+h1#_top {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.sl-markdown-content h2 {
+  margin-top: 2.5rem;
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+}
+.sl-markdown-content h3 {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+}
+
+/* Lead paragraph (first paragraph of an article) — muted, slightly larger.
+   Editorial dek treatment. */
+.sl-markdown-content > p:first-of-type {
+  color: var(--lf-text-secondary);
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+/* Code blocks read like operational evidence. */
+.expressive-code,
+pre,
+code {
+  font-family: var(--lf-font-mono);
+  letter-spacing: var(--lf-letter-spacing);
+}
+
+/* Callouts: border + icon, color alone is never sufficient. */
+.starlight-aside {
+  border-inline-start-width: 3px;
+  border-radius: var(--lf-radius-sm);
+  background: var(--lf-surface);
+}
+
+/* Tag treatment — pill outline matching Phoenix/LinkedIn editorial system. */
+.tag,
+a[rel="tag"] {
+  border: 1px solid var(--lf-line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--lf-accent);
+}
+
+/* Author treatment: text-first; suppress placeholder avatars. */
+.author img[src$=".png"]:not([src*="/authors/"]),
+.author img[alt=""],
+main img[src*="/authors/forge"] {
+  display: none !important;
+}
+
+/* Prev/Next pagination at the bottom of a post — Starlight renders the
+   linked post title via .link-title at heading scale. Bring it down to
+   normal text so it doesn't compete with the article H1. */
+.pagination-links {
+  margin-top: 3rem;
+  gap: 1rem;
+}
+.pagination-links a {
+  border: 1px solid var(--lf-line);
+  border-radius: var(--lf-radius-md);
+  background: var(--lf-surface);
+  padding: 1rem 1.25rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+.pagination-links a:hover {
+  background: var(--lf-sidebar-hover);
+  border-color: var(--lf-accent);
+}
+.pagination-links a > span:first-child,
+.pagination-links a .link-label {
+  color: var(--lf-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.pagination-links a .link-title,
+.pagination-links a > span:nth-child(2) {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--lf-ink);
+  font-family: var(--lf-font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+/* Theme-aware editorial links. */
+.sl-markdown-content a {
+  color: var(--lf-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--lf-line);
+  text-underline-offset: 0.18em;
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+.sl-markdown-content a:hover {
+  color: var(--lf-accent-hover);
+  text-decoration-color: var(--lf-accent);
+}
+
+/* v3 surface, selected-row tint, and wrapping navigation labels. */
+.sidebar-pane,
+.sidebar-content {
+  background: var(--lf-sidebar-bg);
+}
+.sidebar-pane a,
+.sidebar-content a {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-family: var(--lf-font-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--lf-text-secondary);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+.sidebar-pane a:hover,
+.sidebar-content a:hover {
+  background: var(--lf-sidebar-hover);
+  color: var(--lf-ink);
+}
+.sidebar-pane a[aria-current="page"],
+.sidebar-content a[aria-current="page"],
+.sidebar-pane a.active {
+  background: var(--lf-sidebar-active);
+  color: var(--lf-accent);
+  font-weight: 600;
+}
+/* Group headings inside the sidebar (sections like 'Start here'). */
+.sidebar-pane summary,
+.sidebar-pane > ul > li > span,
+.sidebar-content > ul > li > span {
+  font-family: var(--lf-font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lf-muted);
+  padding: 0.5rem 0.75rem;
+}
+
+/* Right-sidebar TOC anchor links — same family/scale, lighter weight. */
+.right-sidebar a,
+starlight-toc a,
+mobile-starlight-toc a {
+  font-family: var(--lf-font-body);
+  font-size: 0.875rem;
+  color: var(--lf-text-secondary);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+.right-sidebar a:hover,
+starlight-toc a:hover,
+mobile-starlight-toc a:hover {
+  color: var(--lf-accent);
+}
+.right-sidebar a[aria-current="true"],
+starlight-toc a[aria-current="true"] {
+  color: var(--lf-accent);
+  font-weight: 600;
+}
+
+/* Header nav link treatment (top bar). */
+.right-group a:hover,
+header.header a:hover {
+  color: var(--lf-accent);
+}
+
+/* Mermaid: SVG figure, editorial spacing. */
+.mermaid-figure {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--lf-surface);
+  border: 1px solid var(--lf-line);
+  border-radius: var(--lf-radius-md);
+  overflow-x: auto;
+}
+.mermaid-figure svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+/* Hide raw mermaid code while it's about to be replaced — soften FOUC. */
+pre[data-language="mermaid"] {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+pre[data-language="mermaid"].mermaid-failed {
+  opacity: 1;
+}
+
+/* Connect login glow stays on the page canvas; reading surfaces stay solid. */
+body {
+  background: var(--lf-login-background), var(--lf-bg);
+  background-repeat: no-repeat;
+  min-height: 100dvh;
+}
+.main-frame {
+  background: transparent;
+}
+.card,
+.sl-link-card {
+  background: var(--lf-surface);
+  border: 1px solid var(--lf-line);
+  border-radius: var(--lf-radius-lg);
+  box-shadow: var(--lf-shadow);
+}
+.sl-link-card:hover {
+  border-color: var(--lf-accent);
+}
+.sl-markdown-content .sl-link-card a {
+  color: var(--lf-ink);
+  text-decoration: none;
+}
+.sl-markdown-content .sl-link-card a:hover {
+  color: var(--lf-accent);
+}
+.card .title,
+.sl-link-card .title {
+  font-family: var(--lf-font-heading);
+  font-weight: 600;
+}
+.sl-link-button {
+  border-radius: var(--lf-radius-md);
+}
+.sl-link-button.primary {
+  background: var(--lf-primary);
+  border-color: var(--lf-primary);
+  color: var(--lf-text-on-accent);
+}
+.sl-link-button.primary:hover {
+  background: var(--lf-primary-hover);
+  border-color: var(--lf-primary-hover);
+}
+:focus-visible {
+  outline: 2px solid var(--lf-accent);
+  outline-offset: 3px;
+}
