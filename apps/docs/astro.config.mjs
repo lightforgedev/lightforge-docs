@@ -20,19 +20,19 @@ export default defineConfig({
         },
         {
           label: "Saathi",
-          autogenerate: { directory: "saathi" },
+          items: [{ autogenerate: { directory: "saathi" } }],
         },
         {
           label: "AEGIS Platform",
-          autogenerate: { directory: "platform" },
+          items: [{ autogenerate: { directory: "platform" } }],
         },
         {
           label: "API Reference",
-          autogenerate: { directory: "api" },
+          items: [{ autogenerate: { directory: "api" } }],
         },
         {
           label: "Governance",
-          autogenerate: { directory: "governance" },
+          items: [{ autogenerate: { directory: "governance" } }],
         },
       ],
       plugins: [

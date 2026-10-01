@@ -16,7 +16,7 @@
     "lint:links": "npm run lint:links --workspaces --if-present"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.12"
   },
   "overrides": {
     "@astrojs/sitemap": "3.6.1"
