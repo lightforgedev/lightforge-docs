@@ -548,7 +548,7 @@ h1#_top {
     inset 0 0 0 3px color-mix(in srgb, var(--lf-sheet-red-text) 45%, transparent);
   padding: 0 12px;
   color: var(--lf-sheet-red-text);
-  content: "Saathi · AEGIS Platform" / "";
+  content: "Hybrid SDLC · AEGIS Platform" / "";
   font: 600 0.75rem / 1 var(--lf-font-mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -693,6 +693,11 @@ h1#_top {
 /* "What's here" is the drawing index: each card is a numbered sheet. */
 [data-has-hero] .card-grid {
   counter-reset: lf-index;
+}
+@media (min-width: 72rem) {
+  [data-has-hero] .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 [data-has-hero] .card-grid .card {
   position: relative;

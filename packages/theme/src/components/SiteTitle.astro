@@ -5,11 +5,8 @@
 const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
 const [brand, ...rest] = siteTitle.split(" ");
 const surface = rest.join(" ");
-const links = [
-  { label: "Home", href: "https://lightforge.dev/" },
-  { label: "Docs", href: "https://docs.lightforge.dev/" },
-  { label: "Blog", href: "https://lightforge.dev/blog/" },
-];
+// Home and Docs return once those surfaces are public.
+const links = [{ label: "Blog", href: "https://lightforge.dev/blog/" }];
 ---
 
 <div class="lf-brand">
