@@ -41,7 +41,8 @@ npm run build:blog   # → apps/blog/dist (paths under /blog)
 Both apps deploy to **Cloudflare Pages** as separate projects, auto-built on push to `main`. PR previews enabled.
 
 - `lightforge-docs` project → `docs.lightforge.dev` (CNAME)
-- `lightforge-blog` project → routed by Cloudflare Page/Transform Rule from `lightforge.dev/blog/*`. Phoenix never sees `/blog/*` traffic.
+- `lightforge-blog` project → served at `lightforge.dev/blog/*` by the Cloudflare Snippet `blog_proxy` (Rules > Snippets), which strips `/blog` and fetches the Pages project. Phoenix never sees `/blog/*` traffic.
+- `lightforge-landing` project → the landing pages at `lightforge.dev/`, `/connect`, `/platform`, served the same way by the Snippet `landing_proxy`. Its source is the `aegis-v3-prototype` repo, not this one; see [docs/landing-pages.md](docs/landing-pages.md) for who serves what, how to update it, and what is pending.
 
 Infra owned by Jasper.
 
