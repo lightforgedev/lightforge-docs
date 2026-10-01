@@ -9,9 +9,9 @@ export default defineConfig({
   base: "/blog",
   integrations: [
     starlight({
-      title: "Lightforge Blog",
+      title: "LightForge Blog",
       description:
-        "Engineering, product, and research writing from the Lightforge team.",
+        "Engineering, product, and research writing from the LightForge team.",
       plugins: [
         // starlight-blog plugin removed: its prefix:'' support is broken in
         // 0.25 (getStaticPaths returns empty string, the listing renders
@@ -20,12 +20,15 @@ export default defineConfig({
         // src/content/docs/index.mdx. blogSchema kept in content.config.ts
         // so post frontmatter still validates.
         starlightLlmsTxt({
-          projectName: "Lightforge Blog",
+          projectName: "LightForge Blog",
           description:
             "Lightforge.dev blog — engineering, product, and research posts. Append `.md` to any post URL for raw Markdown.",
         }),
       ],
       customCss: ["./src/styles/tokens.css"],
+      components: {
+        SiteTitle: "@lightforge/theme/src/components/SiteTitle.astro",
+      },
       // Render fenced ```mermaid blocks as SVG client-side. Themed to
       // LightForge tokens (off-white canvas, black ink, coral accent).
       // Build-time render via rehype-mermaid is heavier (playwright dep);

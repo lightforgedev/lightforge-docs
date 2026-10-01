@@ -26,7 +26,7 @@ jobs:
         run: |
           # Authored blog content must not use absolute-root links — they break
           # under base: '/blog'. Catch in source so the message is actionable.
-          if grep -REn 'href="/[a-z]' apps/blog/src/content --include='*.mdx' --include='*.md'; then
+          if grep -REn 'href="/[a-z]' apps/blog/src/content --include='*.mdx' --include='*.md' | grep -v 'href="/blog/'; then
             echo "::error::Found absolute-root links in blog source. Use relative or /blog-prefixed paths."
             exit 1
           fi
