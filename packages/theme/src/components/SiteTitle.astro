@@ -14,7 +14,9 @@ const links = [
 
 <div class="lf-brand">
   <a href={siteTitleHref} class="site-title lf-brand__title">
-    <span translate="no">{brand}</span>
+    <span translate="no">
+      {brand.replace(/Forge$/, "")}<span class="lf-brand__forge">Forge</span>
+    </span>
     {surface && <span class="sr-only">{surface}</span>}
   </a>
   <nav class="lf-site-nav" aria-label="LightForge sites">
