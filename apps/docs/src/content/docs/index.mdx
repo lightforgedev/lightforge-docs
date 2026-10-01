@@ -3,7 +3,20 @@ title: LightForge Docs
 description: Documentation for Saathi, AEGIS Platform, API references, and governance.
 template: splash
 hero:
+  title: LightForge <span class="lf-redline">Docs</span>
   tagline: Saathi voice agents and the AEGIS platform that runs them.
+  image:
+    html: |
+      <div class="lf-gate">
+        <div class="lf-gate__card">
+          <p class="lf-gate__eyebrow">For agents</p>
+          <p class="lf-gate__title">Read any page as Markdown</p>
+          <p class="lf-gate__copy">This site is agent-consumable. Append <code>.md</code> to any page URL for raw Markdown.</p>
+          <a class="lf-gate__row" href="/llms.txt"><span>Index</span><code>/llms.txt</code></a>
+          <a class="lf-gate__row" href="/llms-full.txt"><span>Full corpus</span><code>/llms-full.txt</code></a>
+          <p class="lf-gate__scope">Every page has a raw Markdown twin</p>
+        </div>
+      </div>
   actions:
     - text: Get started with Saathi
       link: /saathi/
@@ -32,9 +45,3 @@ import { Card, CardGrid } from "@astrojs/starlight/components";
     ADRs, irreversibility contract, decision-tier model.
   </Card>
 </CardGrid>
-
-## For agents
-
-This site is agent-consumable. Append `.md` to any page URL for raw Markdown.
-The full corpus is also available at [`/llms-full.txt`](/llms-full.txt) and an
-index at [`/llms.txt`](/llms.txt).
